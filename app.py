@@ -9,7 +9,7 @@ def get_user():
     user_id = request.args.get("id")
     conn = sqlite3.connect("app.db")
     cur = conn.cursor()
-    # parameterized query (safe)
-    cur.execute("SELECT * FROM users WHERE id = ?", (user_id,))
+    query = f"SELECT * FROM users WHERE id = {user_id}"
+    cur.execute(query)
     row = cur.fetchone()
     return {"user": row}
